@@ -86,6 +86,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Jade will get a Software Engineering job in 2021',
+    date: 'Mar 14th, 2021',
+    firstParagraph: `Shortstop right field bag second base rookie nubber foul pole triple-A sidearm. Rainout good eye wins out pennant cardinals outs 
+    left field line drive. Third base dead red stance pull ground rule double at-bat line drive. Shortstop doubleheader southpaw around the horn rally 
+    walk off in the hole outs hitter. Left fielder outfield cup of coffee 1-2-3 save, reliever foul line pine tar runs. Pull fair slugging center 
+    fielder league rally pine tar left fielder.`,
+
+    secondParagraph: `Moneyball screwball appeal outs butcher boy error airmail dribbler. Take dribbler left on base tag bush league relief pitcher 
+    third baseman gapper bullpen. Batter's box no decision friendly confines left field robbed crooked number stretch crooked number sweep. Rubber 
+    game rookie practice pinch runner scorecard center fielder gapper check swing grounder. Pull nubber small ball foul earned run, count rhubarb 
+    stadium. Ground rule double small ball rip pennant visitors full count hot dog assist gap.`,
+
+    thirdParagraph: `Batting average double play 4-6-3 shortstop nubber bullpen game cycle. Moneyball double switch petey double play leather 
+    fielder's choice losses walk off. Double switch diamond shift doubleheader run disabled list can of corn. Save squeeze second base assist league,
+    dribbler scorecard foul line. Cookie outside grand slam bag batter's box center field passed ball baseline. Hardball inside batting average 
+    rotation third baseman baseball out tapper.`
   }
 ];
 
@@ -114,3 +132,51 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+//Jade Code Now
+//Grabbed the Articles Class 
+let articles = document.querySelector('.articles')
+
+//Start of the articleMaker Component
+function articleMaker(article) {
+// Created all of the HTML Elements needed and added their classes and events
+
+  let div = document.createElement('div')
+  div.classList.add('article')
+  let h2 = document.createElement('h2');
+  let pDate = document.createElement('p');
+  pDate.classList.add('date')
+  let p1 = document.createElement('p');
+  let p2 = document.createElement('p');
+  let p3 = document.createElement('p');
+  let span = document.createElement('span');
+  span.classList.add('expandButton')
+  span.addEventListener('click', event => {
+    div.classList.toggle('article-open')
+  })
+
+  //Added the content in each element
+  h2.textContent = article.title;
+  pDate.textContent = article.date;
+  p1.textContent = article.firstParagraph;
+  p2.textContent = article.secondParagraph;
+  p3.textContent = article.thirdParagraph;
+  span.textContent = '+'
+ 
+  //Created an Array of the elements to loop over and add to append to the div
+  let array = [h2, pDate, p1, p2, p3, span]
+  //Looping over the array and appending to the div
+  array.forEach(element => {
+    div.appendChild(element)
+  })
+  //Returning the div to be appended to the div with class 'articles'
+  return div
+}
+
+// Looping over the data array to grab each article object.
+// Each article object is passed as an argument into the articleMaker function
+// articleMaker returns a div with content from the article object in data
+// the returned div from articleMaker gets appeneded (to the end) of the div with class 'articles'
+data.forEach(article => {
+  articles.appendChild(articleMaker(article))
+})
